@@ -1,0 +1,43 @@
+/* src/components/SoilAndClimateInfo.css */
+.soil-climate-info {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.soil-climate-info h2 {
+    color: #8fd494;
+    margin-bottom: 1rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-section h3 {
+    color: #8fd494;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+.nutrient-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.nutrient-box {
+    flex: 1;
+    padding: 0.6rem;
+    background-color: rgba(76, 175, 80, 0.1);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.nutrient-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+}

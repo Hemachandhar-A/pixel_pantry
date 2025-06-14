@@ -1,0 +1,60 @@
+/* Upload Container */
+.upload-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+  }
+  
+  /* Upload Button */
+  .upload-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #609065;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .upload-button:hover {
+    background-color: #4e7351;
+  }
+  
+  /* Image Preview */
+  .image-preview {
+    margin-top: 20px;
+    background: #333;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .image-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #fff;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .upload-container {
+      width: 95%;
+    }
+  
+    .upload-button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  

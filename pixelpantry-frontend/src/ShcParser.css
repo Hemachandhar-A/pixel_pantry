@@ -1,0 +1,281 @@
+/* App.css */
+.shc-logo {
+  background-color: #1A73E8;
+  color: white;
+}
+
+.submit-button {
+  background-color: #1A73E8;
+}
+
+.submit-button:hover {
+  background-color: #185ABC;
+}
+
+.submit-button:disabled {
+  background-color: #4285F4;
+}
+
+.info-panel {
+  background: #F8F9FA;
+  border: 1px solid #DADCE0;
+}
+
+.nutrient-item {
+  background: white;
+  border: 1px solid #DADCE0;
+}
+
+.status-low {
+  color: #EA4335;
+}
+
+.status-medium {
+  color: #34A853;
+}
+
+.status-high {
+  color: #EA4335;
+}
+
+.shc-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+  }
+  
+  .shc-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    padding: 30px;
+  }
+  
+  .shc-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .shc-logo {
+    background-color: #4285F4;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+  }
+  
+  .shc-title h2 {
+    margin: 0 0 5px 0;
+    color: #333;
+  }
+  
+  .shc-title p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .server-status.error {
+    color: #e53935;
+    font-size: 14px;
+    margin-top: 8px;
+    padding: 5px 10px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  
+  .shc-form {
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .file-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .image-preview {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .error-message {
+    color: #e53935;
+    background-color: #ffebee;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .submit-button {
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .submit-button:hover {
+    background-color: #3367d6;
+  }
+  
+  .submit-button:disabled {
+    background-color: #a0b4dc;
+    cursor: not-allowed;
+  }
+  
+  /* Results section */
+  .results-section {
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+  }
+  
+  .results-section h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .info-panel {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .info-panel h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #444;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+  }
+  
+  .info-grid div {
+    padding: 5px 0;
+  }
+  
+  .label {
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .nutrient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  .nutrient-item {
+    background: white;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .nutrient-name {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #444;
+  }
+  
+  .status-low {
+    color: #e53935;
+    font-weight: 500;
+  }
+  
+  .status-medium {
+    color: #43a047;
+    font-weight: 500;
+  }
+  
+  .status-high {
+    color: #ffa000;
+    font-weight: 500;
+  }
+  
+  .recommendations {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .recommendations h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #444;
+  }
+  
+  .recommendation-list {
+    padding-left: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .recommendation-list li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  .note {
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .shc-card {
+      padding: 20px;
+    }
+    
+    .info-grid, .nutrient-grid {
+      grid-template-columns: 1fr;
+    }
+  }

@@ -1,0 +1,42 @@
+{
+    "latitude": "12.7495076",
+    "longitude": "80.198654",
+    "location": "Tamil Nadu",
+    "N": "Low",
+    "P": "Medium",
+    "K": "High",
+    "predictions": [
+        {
+            "original_crop": "rice",
+            "predicted_avg_temp": 29.86,
+            "predicted_total_rainfall": 112.32,
+            "ph": 6.5,
+            "humidity": 50,
+            "recommended_crop": "Mango"
+        },
+        {
+            "original_crop": "lentil",
+            "predicted_avg_temp": 27.97,
+            "predicted_total_rainfall": 1601.83,
+            "ph": 6.5,
+            "humidity": 50,
+            "recommended_crop": "Coffee"
+        },
+        {
+            "original_crop": "wheat",
+            "predicted_avg_temp": 29.64,
+            "predicted_total_rainfall": 459.37,
+            "ph": 6.5,
+            "humidity": 50,
+            "recommended_crop": "Coffee"
+        },
+        {
+            "original_crop": "ragi",
+            "predicted_avg_temp": 28.19,
+            "predicted_total_rainfall": 1576.07,
+            "ph": 6.5,
+            "humidity": 50,
+            "recommended_crop": "Coffee"
+        }
+    ]
+}

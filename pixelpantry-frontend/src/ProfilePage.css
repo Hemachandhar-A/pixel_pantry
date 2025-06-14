@@ -1,0 +1,60 @@
+/* Profile Page Container */
+.profile-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #A4C3B2; /* Soft Green Border */
+    border-radius: 10px;
+    background-color: #FFFFFF; /* White background */
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Details */
+.profile-details p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #2D2D2D; /* Dark Gray */
+}
+
+/* Input Fields */
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #88AB8E; /* Muted Green */
+    border-radius: 5px;
+    background-color: #F4F9F4; /* Light Greenish White */
+    color: #2D2D2D;
+}
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Edit Button - Orange */
+.edit-btn {
+    background-color: #FF8C00;
+    color: white;
+}
+
+/* Save Button - Green */
+.save-btn {
+    background-color: #228B22;
+    color: white;
+}
+
+/* Hover Effects */
+.edit-btn:hover {
+    background-color: #E07B00; /* Darker Orange */
+}
+
+.save-btn:hover {
+    background-color: #1E7B1E; /* Darker Green */
+}

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Disease and Pest Detection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .upload-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .upload-section:hover {
+            background-color: #f8f9fa;
+        }
+        #preview {
+            max-width: 100%;
+            max-height: 300px;
+            margin: 20px auto;
+            display: none;
+        }
+        #results {
+            margin-top: 20px;
+            display: none;
+        }
+        .result-card {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .progress-bar {
+            height: 20px;
+            position: relative;
+            background: #e0e0e0;
+            border-radius: 50px;
+            margin: 5px 0;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 50px;
+            background: #3498db;
+            transition: width 0.3s ease;
+            text-align: right;
+            line-height: 20px;
+            color: white;
+            padding-right: 10px;
+            font-size: 12px;
+        }
+        .prediction {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            margin: 10px auto;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rice Disease and Pest Detection</h1>
+
+        <div class="upload-section" id="drop-area">
+            <form id="upload-form">
+                <p>Upload a rice plant image for analysis</p>
+                <input type="file" id="file-input" accept="image/jpeg,image/png" style="display: none;">
+                <button type="button" id="select-button">Select Image</button>
+                <p>or drag and drop an image here</p>
+            </form>
+        </div>
+
+        <img id="preview" alt="Image preview">
+
+        <div id="loading">
+            <div class="spinner"></div>
+            <p>Analyzing image...</p>
+        </div>
+
+        <div id="results">
+            <div class="prediction" id="prediction-text"></div>
+
+            <div class="result-card">
+                <h3>Probabilities</h3>
+                <div id="probabilities"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+        const selectButton = document.getElementById('select-button');
+        const preview = document.getElementById('preview');
+        const results = document.getElementById('results');
+        const loading = document.getElementById('loading');
+        const predictionText = document.getElementById('prediction-text');
+        const probabilitiesDiv = document.getElementById('probabilities');
+
+        // API endpoint - will be dynamically set
+        let API_ENDPOINT = '';
+        let analysisType = ''; // 'disease' or 'pest'
+
+        // Handle file selection button
+        selectButton.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Handle file selection
+        fileInput.addEventListener('change', handleFileSelect);
+
+        // Handle drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            dropArea.style.backgroundColor = '#e3f2fd';
+        }
+
+        function unhighlight() {
+            dropArea.style.backgroundColor = '';
+        }
+
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            // For simplicity, assuming disease detection for drag and drop
+            analysisType = 'disease';
+            API_ENDPOINT = '/rice-disease/predict';
+            handleFiles(files);
+        }
+
+        function handleFileSelect(e) {
+            const files = e.target.files;
+            // For simplicity, assuming disease detection for file select
+            analysisType = 'disease';
+            API_ENDPOINT = '/rice-disease/predict';
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            if (files.length) {
+                const file = files[0];
+                if (file.type.match('image.*')) {
+                    displayPreview(file);
+                    uploadFile(file);
+                } else {
+                    alert('Please select an image file (JPEG or PNG).');
+                }
+            }
+        }
+
+        function displayPreview(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                results.style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+        }
+
+        function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Show loading indicator
+            loading.style.display = 'block';
+
+            fetch(API_ENDPOINT, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayResults(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error analyzing image. Please try again.');
+            })
+            .finally(() => {
+                loading.style.display = 'none';
+            });
+        }
+
+        function displayResults(data) {
+            // Display the main prediction
+            predictionText.textContent = `Prediction: <span class="math-inline">\{data\.predicted\_class\} \(</span>{(data.confidence * 100).toFixed(1)}%)`;
+
+            // Clear previous probabilities
+            probabilitiesDiv.innerHTML = '';
+
+            // Display probabilities as progress bars
+            data.sorted_probabilities.forEach(item => {
+                const probability = item.probability * 100;
+                const barContainer = document.createElement('div');
+                barContainer.innerHTML = `
+                    <div style="display: flex; justify-content:space-between; margin-bottom: 5px;">
+                        <span>${item.class}</span>
+                        <span>${probability.toFixed(1)}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: ${probability}%"></div>
+                    </div>
+                `;
+                probabilitiesDiv.appendChild(barContainer);
+            });
+
+            // Show results
+            results.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
