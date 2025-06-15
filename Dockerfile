@@ -1,20 +1,3 @@
-# ---------- FRONTEND STAGE ----------
-FROM node:18 AS frontend
-
-# Set working directory inside the container
-WORKDIR /GIT_PIX
-
-# Copy your frontend source code into the container
-# Assuming your frontend code is in a 'pixelpantry-frontend' directory relative to the Dockerfile
-COPY pixelpantry-frontend/ .
-
-# Install dependencies
-RUN npm install
-
-# Build the production-ready Vite frontend (outputs to /webapp/dist)
-RUN npm run build
-
-
 # ---------- BACKEND STAGE ----------
 # Using python:3.11-slim-bookworm for a specific, stable Python 3.11 version on Debian Bookworm
 FROM python:3.11-slim-bookworm AS backend
@@ -57,9 +40,7 @@ COPY pixelpantry_backend/ .
 # Install Python dependencies (requirements.txt should be inside pixelpantry_backend and now at /webapp/requirements.txt)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the built frontend (Vite dist folder) from frontend stage to Flask static folder
-# This makes the frontend accessible from your Flask app if serving static files
-COPY --from=frontend /GIT_PIX/dist/ ./static/
+
 
 # Set Flask environment variables
 ENV FLASK_APP=app.py
