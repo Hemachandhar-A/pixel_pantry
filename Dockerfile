@@ -65,8 +65,7 @@ COPY --from=frontend /webapp/dist/ ./static/
 ENV FLASK_APP=app.py
 # FLASK_RUN_PORT is for Flask's dev server, Gunicorn will bind to 0.0.0.0:8080 directly
 # ENV FLASK_RUN_PORT=8080 
-ENV FLASK_ENV=production # Good practice for production
-
+ENV FLASK_ENV=production 
 # Expose the port where your Gunicorn server will listen
 EXPOSE 8080
 
