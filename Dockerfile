@@ -59,7 +59,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the built frontend (Vite dist folder) from frontend stage to Flask static folder
 # This makes the frontend accessible from your Flask app if serving static files
-COPY --from=frontend /webapp/dist/ ./static/
+COPY --from=frontend /GIT_PIX/dist/ ./static/
 
 # Set Flask environment variables
 ENV FLASK_APP=app.py
