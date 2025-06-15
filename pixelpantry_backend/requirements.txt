@@ -24,3 +24,5 @@ tensorflow-cpu==2.19.0
 # Optional extras
 python-dotenv
 tqdm
+
+gunicorn==21.2.0
