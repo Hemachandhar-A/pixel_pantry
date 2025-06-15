@@ -2,19 +2,19 @@
 # This file explicitly configures Nixpacks for a Python application.
 
 [phases.setup]
-# Ensure python3 is available in the build environment
-pkgs = ["python3"]
+# Force a specific Python version (3.10) for the build and runtime environment.
+# 'python3' ensures a generic Python 3, and 'python@python3.10' forces the specific version.
+# 'gcc' is included as it's often needed for compiling certain Python packages.
+pkgs = ["python3", "python@python3.10", "gcc"]
 
 [phases.build]
 # Define the exact command to install your Python dependencies
-# This explicitly tells Nixpacks to run pip install
 cmds = ["pip install -r requirements.txt"]
 
 [phases.start]
 # Define the exact command to start your Flask application
-# This explicitly uses python3 to run gunicorn as a module
+# Keep using 'python3 -m gunicorn' for robustness.
 cmd = "python3 -m gunicorn app:app"
 
-[variables]
-# This line tells Nixpacks to use a specific Python version
-PYTHON_VERSION = "3.10" # OR "3.11" - try 3.10 first
+# Remove the [variables] section if it existed for PYTHON_VERSION.
+# It seems to not be effective for controlling the base Python version for Nixpacks.
